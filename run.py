@@ -5,6 +5,12 @@ check hit, miss or sink in loop.
 Board needs to be interactive, change "coordinate" to "x" as in "xy graph"
 """
 
+def get_shot_input():
+    shot = input("Please enter your guess: ")
+    shot = int(shot)
+    if shot < 0 or shot > 99:
+        print("incorrect input, please guess again: ")
+
 #Board
 def show_board(shot_hit, shot_miss, shot_sink):
     coordinate = 0
@@ -28,4 +34,7 @@ def show_board(shot_hit, shot_miss, shot_sink):
 shot_hit = [21, 22]
 shot_miss = [18, 19, 20]
 shot_sink = [23]
+
+#functions
+get_shot_input()
 show_board(shot_hit, shot_miss, shot_sink)
