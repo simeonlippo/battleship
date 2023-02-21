@@ -14,12 +14,13 @@ def get_shot_input(guesses):
             if shot < 0 or shot > 99:
                 print("incorrect input, please try again: ")
             elif shot in guesses:
-                print("incorrect input, used before: ")
+                print("you've alredy shot there! Try again: ")
             else:
                 ok = "y"
                 break
         except:
             print("incorrect entry, please enter again: ")
+
     return shot
 
 #Board
@@ -42,11 +43,40 @@ def show_board(shot_hit, shot_miss, shot_sink):
             coordinate += 1
         print(x, row)
 
-shot_hit = [21, 22]
-shot_miss = [18, 19, 20]
-shot_sink = [23]
-guesses = shot_hit + shot_miss + shot_sink
+def check_shot(shot, boat1, boat2, shot_hit, shot_miss, shot_sink):
+    if shot in boat1:
+        boat1.remove(shot)
+        if len(boat1) > 0:
+            shot_hit.append(shot)
+        else:
+            shot_sink.append(shot)
+    elif shot in boat2:
+        boat2.remove(shot)
+        if len(boat2) > 0:
+            shot_hit.append(shot)
+        else:
+            shot_sink.append(shot)
+    else:
+        shot_miss.append(shot)
+
+    return boat1, boat2, shot_hit, shot_miss, shot_sink
+
+boat1 = [1, 2, 3]
+boat2 = [34, 35, 36]
+
+shot_hit = []
+shot_miss = []
+shot_sink = []
 
 #functions
-shot = get_shot_input(guesses)
-show_board(shot_hit, shot_miss, shot_sink)
+for i in range(100):
+    guesses = shot_hit + shot_miss + shot_sink
+    shot = get_shot_input(guesses)
+    boat1, boat2, shot_hit, shot_miss, shot_sink = check_shot(shot, boat1, boat2, shot_hit, shot_miss, shot_sink)
+    show_board(shot_hit, shot_miss, shot_sink)
+
+    if len(boat1) < 1 and len(boat2) < 1:
+        print("You've won the game!")
+        break
+
+print("Finished")
