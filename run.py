@@ -1,10 +1,3 @@
-"""
-Minimal requirments: Show board, players shot, 
-check hit, miss or sink in loop.
-
-Board needs to be interactive, change "coordinate" to "x" as in "xy graph"
-"""
-
 def get_shot_input(guesses):
     ok = "n"
     while ok == "n":
@@ -67,6 +60,7 @@ boat2 = [34, 35, 36]
 shot_hit = []
 shot_miss = []
 shot_sink = []
+print(boat_start)
 
 #functions
 for i in range(100):
